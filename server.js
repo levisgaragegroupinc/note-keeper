@@ -2,9 +2,9 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const app = express();
-const uuid = require("uuid/v4");
+const uuid = require("uuid");
 
-const PORT = process.en.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // for accessing static public files
 app.use(express.static("public"));
@@ -19,18 +19,21 @@ app.get("/", (req, res) =>
 
 // GET notes route
 app.get("/api/notes", (req, res) => {
-  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+  console.log(__dirname);
+  fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
-      const parsedNotes = JSON.parse(data);
+      console.log(data);
+      res.json(data);
+      // const parsedNotes = JSON.parse(data);
     }
   });
 });
 
 // POST notes route
 app.post("/api/notes", (req, res) => {
-  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+  fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
@@ -53,7 +56,7 @@ app.post("/api/notes", (req, res) => {
 
 // DELETE notes route
 app.delete("/api/notes/:id", (req, res) => {
-  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+  fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
@@ -61,7 +64,7 @@ app.delete("/api/notes/:id", (req, res) => {
       let notesArray = JSON.parse(data);
       for (i = 0; i < notesArray.length; i++) {
         notesArray[i].id != req.params.id
-          ? newArray.push(notesArray[i])
+          ? newArray.push(notesArray[i]) // could use the filter method here.
           : console.log(`Note ID ${notesArray[i]} will be deleted.`);
       }
       fs.writeFile(
@@ -77,8 +80,8 @@ app.delete("/api/notes/:id", (req, res) => {
 });
 
 // add routes here
-require("./routes/api")(app);
-require("./routes/apimore")(app);
+// require("./routes/api")(app);
+// require("./routes/apimore")(app);
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
