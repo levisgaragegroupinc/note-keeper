@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const api = require("./routes/routes");
 const fs = require("fs");
 const app = express();
 // const uuid = require("uuid/v4"); // https://www.npmjs.com/package/uuid
@@ -93,9 +94,6 @@ app.post("/api/notes", function (req, res) {
     fs.writeFileSync(path.join(__dirname, "/db/db.json"), notesString);
   });
 });
-
-const writeToFile = (notesString, "/db/db.json") =>
-
 
 // DELETE notes route
 app.delete("/api/notes/:id", (req, res) => {
