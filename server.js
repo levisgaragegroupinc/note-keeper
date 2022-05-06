@@ -18,7 +18,7 @@ app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-// GET route
+// // GET route
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
@@ -28,6 +28,14 @@ app.get("/api/notes", (req, res) => {
   fs.readFile("/db/db.json")
     .then((data) => res.json(JSON.parse(data)))
     .catch((err) => res.status(500).json("Unalbe to read saved notes!"));
+});
+
+// GET notes route
+app.get("/api/notes", (req, res) => {
+  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
+  });
 });
 
 // POST notes route
