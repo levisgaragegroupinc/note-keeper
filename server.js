@@ -25,7 +25,7 @@ app.get("/api/notes", (req, res) => {
       console.error(err);
     } else {
       console.log(data);
-      res.json(data);
+      res.json(JSON.parse(data));
       // const parsedNotes = JSON.parse(data);
     }
   });
@@ -40,6 +40,7 @@ app.post("/api/notes", (req, res) => {
       let newNote = req.body;
       let notesArray = JSON.parse(data);
       newNote.id = uuid();
+      console.log(newNote.id);
       notesArray.push(newNote);
 
       fs.writeFile(
