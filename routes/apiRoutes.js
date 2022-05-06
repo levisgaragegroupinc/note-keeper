@@ -21,7 +21,7 @@ note.get("/", (req, res) => {
 note.post("/", (req, res) => {
   console.info(`${req.method} request received to add a new note.`);
   const { title, text, id } = req.body;
-  if (title && text && id) {
+  if (title && text) {
     const newNote = {
       title,
       text,
@@ -41,10 +41,9 @@ note.post("/", (req, res) => {
 // DELETE route for deleting a note
 note.delete("/:id", (req, res) => {
   console.info(
-    `${req.method} request received to delete a note id: ${req.body.id}`
+    `${req.method} request received to delete a note id: ${req.params.id}`
   );
-
-  readAndDeleteNote(id, "./db/db.json");
+  readAndDeleteNote(req.params.id, "./db/db.json");
   res.json("Note deleted successfully!");
 });
 

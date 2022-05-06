@@ -1,6 +1,12 @@
 const express = require("express");
 const path = require("path");
-const api = require("./routes/apiRoutes");
+const noteRoute = require("./routes/apiRoutes");
+const {
+  readFromFile,
+  writeToFile,
+  readAndAppend,
+  readAndDeleteNote,
+} = require("./helpers/fsUtils");
 // const fs = require("fs");
 const PORT = process.env.PORT || 3001;
 
@@ -11,10 +17,11 @@ const app = express();
 // for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", api);
 
 // for accessing static public files
 app.use(express.static("public"));
+
+app.use("/api/notes", noteRoute);
 
 // GET route for homepage
 app.get("/", (req, res) =>

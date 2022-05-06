@@ -1,12 +1,17 @@
 [
     {
-        "title":"Here is a note title.",
-        "text":"This is the body text of the note.",
+        "title": "Here is a note title.",
+        "text": "This is the body text of the note.",
         "id": "1212"
     },
     {
-        "title":"Here is another note title.",
-        "text":"This is the body text of this note.",
+        "title": "Here is another note title.",
+        "text": "This is the body text of this note.",
         "id": "1214"
+    },
+    {
+        "title": "My favorite note",
+        "text": "Add a new note here.",
+        "id": "47a1a213-67b3-4ec9-b96d-c94fdb3159eb"
     }
 ]
