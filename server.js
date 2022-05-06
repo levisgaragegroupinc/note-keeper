@@ -6,29 +6,28 @@ const uuid = require("uuid");
 
 const PORT = process.env.PORT || 3001;
 
+// for parsing JSON and urlencoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // for accessing static public files
 app.use(express.static("public"));
 
-// for parsing JSON and urlencoded form data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// notes route handler
+// GET notes
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-// index route handler
+// GET route
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
 // GET notes route
 app.get("/api/notes", (req, res) => {
-  fs.readFile("/db/db.json").then((data = res.json(JSON.parse(data))));
-  if (err) {
-    console.error(err);
-  }
+  fs.readFile("/db/db.json")
+    .then((data) => res.json(JSON.parse(data)))
+    .catch((err) => res.status(500).json("Unalbe to read saved notes!"));
 });
 
 // POST notes route
