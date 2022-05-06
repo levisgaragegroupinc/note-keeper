@@ -8,7 +8,7 @@ const {
   readAndAppend,
   readAndDeleteNote,
 } = require("../helpers/fsUtils");
-const uuid = require("./helpers/uuid");
+const uuid = require("../helpers/uuid");
 
 //GET route for retrieving all notes
 note.get("/", (req, res) => {
