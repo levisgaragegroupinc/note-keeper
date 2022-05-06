@@ -13,26 +13,22 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// notes route handler
 app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-app.get("/", (req, res) =>
+// index route handler
+app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
 // GET notes route
 app.get("/api/notes", (req, res) => {
-  console.log(__dirname);
-  fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(data);
-      res.json(JSON.parse(data));
-      // const parsedNotes = JSON.parse(data);
-    }
-  });
+  fs.readFile("/db/db.json").then((data = res.json(JSON.parse(data))));
+  if (err) {
+    console.error(err);
+  }
 });
 
 // POST notes route
