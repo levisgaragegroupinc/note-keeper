@@ -160,7 +160,6 @@ const renderNoteList = async (notes) => {
   }
   console.log(jsonNotes);
   console.log(JSON.parse(jsonNotes)); // added console.log
-  // jsonNotes = JSON.parse(jsonNotes); // added to parse the JSON string
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
@@ -174,13 +173,7 @@ const renderNoteList = async (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList); //This is the original function.
-
-// const getAndRenderNotes = () =>
-//   getNotes().then((data) => {
-//     console.log(data);
-//     renderNoteList(data); // added console.log
-//   });
+const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === "/notes") {
   saveNoteBtn.addEventListener("click", handleNoteSave);

@@ -41,16 +41,16 @@ app.post("/api/notes", (req, res) => {
       let notesArray = JSON.parse(data);
       newNote.id = uuid();
       console.log(newNote.id);
+      console.log(newNote);
       notesArray.push(newNote);
+      const notesArrayString = JSON.stringify(notesArray, null, 4);
 
-      fs.writeFile(
-        "/db/db.json",
-        JSON.stringify(notesArray, null, 4),
-        (writeErr) =>
-          writeErr
-            ? console.error(writeErr)
-            : console.info("Successfully saved new note!")
-      );
+      fs.writeFile("/db/db.json", notesArrayString, (err) => {
+        if (err) {
+          res.status(500).json("Server error when adding new note!");
+          return;
+        } else console.info("Successfully saved new note!");
+      });
     }
   });
 });
