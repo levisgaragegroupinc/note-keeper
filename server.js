@@ -2,7 +2,8 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const app = express();
-const uuid = require("uuid");
+// const uuid = require("uuid/v4"); // https://www.npmjs.com/package/uuid
+const { v4: uuidv4 } = require("uuid");
 
 const PORT = process.env.PORT || 3001;
 
@@ -31,36 +32,70 @@ app.get("/api/notes", (req, res) => {
 });
 
 // GET notes route
-// app.get("/api/notes", (req, res) => {
+app.get("/api/notes", (req, res) => {
+  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
+  });
+});
+
+// POST notes route
+// app.post("/api/notes", (req, res) => {
 //   fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
-//     if (err) throw err;
-//     res.json(JSON.parse(data));
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       let newNote = req.body;
+//       let notesArray = JSON.parse(data);
+//       newNote.id = uuidv4();
+//       notesArray.push(newNote);
+//       const notesArrayString = JSON.stringify(notesArray, null, 4);
+
+//       fs.writeFile("/db/db.json", notesArrayString, "utf8", (err) => {
+//         if (err) {
+//           res.status(500).json("Server error when adding new note!");
+//           return;
+//         } else console.info("Successfully saved new note!");
+//       });
+//       res.json(JSON.parse(notesArrayString));
+//     }
 //   });
 // });
 
 // POST notes route
-app.post("/api/notes", (req, res) => {
-  fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let newNote = req.body;
-      let notesArray = JSON.parse(data);
-      newNote.id = uuid();
-      console.log(newNote.id);
-      console.log(newNote);
-      notesArray.push(newNote);
-      const notesArrayString = JSON.stringify(notesArray, null, 4);
+// app.post("/api/notes", (req, res) => {
+//   fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+//     if (err) throw err;
+//     let newNote = req.body;
+//     let notesArray = JSON.parse(data);
+//     newNote.id = uuidv4();
+//     notesArray.push(newNote);
+//     console.log(notesArray);
+//     let notesArrayString = JSON.stringify(notesArray);
+//     console.log(typeof notesArrayString);
+//     fs.writeFile(path.join(__dirname, "/db/db.json"), notesArrayString);
+//   });
+// });
 
-      fs.writeFile("/db/db.json", notesArrayString, (err) => {
-        if (err) {
-          res.status(500).json("Server error when adding new note!");
-          return;
-        } else console.info("Successfully saved new note!");
-      });
-    }
+// POST notes route
+app.post("/api/notes", function (req, res) {
+  fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+    if (err) throw err;
+    let newNote = req.body;
+    //let id = Math.floor(Math.random() * 1000);
+    let notesArr = JSON.parse(data);
+    let id = notesArr[notesArr.length - 1].id + 1;
+    newNote.id = id;
+    notesArr.push(newNote);
+    //req.body + `{"id":"${id}"}`);
+    let notesString = JSON.stringify(notesArr);
+    console.log(typeof notesString);
+    fs.writeFileSync(path.join(__dirname, "/db/db.json"), notesString);
   });
 });
+
+const writeToFile = (notesString, "/db/db.json") =>
+
 
 // DELETE notes route
 app.delete("/api/notes/:id", (req, res) => {
