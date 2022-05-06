@@ -43,7 +43,8 @@ note.delete("/:id", (req, res) => {
   console.info(
     `${req.method} request received to delete a note id: ${req.params.id}`
   );
-  readAndDeleteNote(req.params.id, "./db/db.json");
+  const noteId = req.params.id;
+  readAndDeleteNote(noteId, "./db/db.json", res);
   res.json("Note deleted successfully!");
 });
 

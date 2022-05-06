@@ -1,7 +1,7 @@
 const express = require("express");
 
 // Import note route
-const routes = require("./routes");
+const routes = require("./apiRoutes");
 
 const app = express();
 

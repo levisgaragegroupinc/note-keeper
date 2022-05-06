@@ -13,5 +13,10 @@
         "title": "My favorite note",
         "text": "Add a new note here.",
         "id": "47a1a213-67b3-4ec9-b96d-c94fdb3159eb"
+    },
+    {
+        "title": "Hamburger and Fries",
+        "text": "Humble Burger.",
+        "id": "ae46fff9-942b-4979-92cd-cddafdc2f1fb"
     }
 ]

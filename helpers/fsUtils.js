@@ -1,3 +1,4 @@
+const req = require("express/lib/request");
 const fs = require("fs");
 const util = require("util");
 // const { v4: uuidv4 } = require("uuid");
@@ -22,14 +23,25 @@ const readAndAppend = (content, file) => {
   });
 };
 
-const readAndDeleteNote = (id, file) => {
+const readAndDeleteNote = (noteId, file, res) => {
   fs.readFile(file, "utf8", (err, data) => {
     if (err) {
       console.error(err);
     } else {
-      const noteListData = JSON.parse(data);
-      const newNoteList = noteListData.filter(noteListData.id != id);
-      writeToFile(file, newNoteList);
+      const noteData = JSON.parse(data);
+      let noteList = [];
+      console.log(`The note ID is: ${noteId}`);
+      console.log(noteData);
+      console.log(noteData.length);
+      console.log(noteData[0]);
+
+      for (let i = 0; i < noteData.length; i++) {
+        if (noteData.id[i] != noteId) {
+          //cannot read properties of undefined (reading '0')
+          noteList.push(noteData[i]);
+        }
+      }
+      writeToFile(file, noteList);
     }
   });
 };
