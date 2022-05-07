@@ -1,10 +1,6 @@
 const note = require("express").Router();
-// const express = require("express");
-// const fs = require("fs");
-// const path = require("path");
 const {
   readFromFile,
-  writeToFile,
   readAndAppend,
   readAndDeleteNote,
 } = require("../helpers/fsUtils");

@@ -1,7 +1,6 @@
 const req = require("express/lib/request");
 const fs = require("fs");
 const util = require("util");
-// const { v4: uuidv4 } = require("uuid");
 
 // Promise version of fs.readFile
 const readFromFile = util.promisify(fs.readFile);
@@ -37,7 +36,6 @@ const readAndDeleteNote = (noteId, file, res) => {
 
       for (let i = 0; i < noteData.length; i++) {
         if (noteData[i].id != noteId) {
-          //cannot read properties of undefined (reading '0')
           noteList.push(noteData[i]);
         }
       }
