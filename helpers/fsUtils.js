@@ -1,4 +1,3 @@
-const req = require("express/lib/request");
 const fs = require("fs");
 const util = require("util");
 
@@ -30,10 +29,6 @@ const readAndDeleteNote = (noteId, file, res) => {
       const noteData = JSON.parse(data);
       let noteList = [];
       console.log(`The note ID is: ${noteId}`);
-      console.log(noteData);
-      console.log(noteData.length);
-      console.log(noteData[0]);
-
       for (let i = 0; i < noteData.length; i++) {
         if (noteData[i].id != noteId) {
           noteList.push(noteData[i]);

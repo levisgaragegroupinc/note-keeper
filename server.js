@@ -1,13 +1,7 @@
 const express = require("express");
 const path = require("path");
 const noteRoute = require("./routes/apiRoutes");
-// const {
-//   readFromFile,
-//   writeToFile,
-//   readAndAppend,
-//   readAndDeleteNote,
-// } = require("./helpers/fsUtils");
-// const fs = require("fs");
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();

@@ -5,18 +5,18 @@
         "id": "1212"
     },
     {
-        "title": "Here is another note title.",
-        "text": "This is the body text of this note.",
-        "id": "1214"
-    },
-    {
         "title": "New note goes here",
         "text": "Body of the note.",
         "id": "124987eb-ecc6-488c-9292-640a6c5162d7"
     },
     {
-        "title": "New note here",
+        "title": "My latest note.",
+        "text": "Here it goes.",
+        "id": "f56c4d2a-05d9-4c8e-93b6-5f572a485424"
+    },
+    {
+        "title": "New note here.",
         "text": "What a great day.",
-        "id": "5638da87-89fc-44c0-863b-65d3bc4dca47"
+        "id": "d6fff48c-e1f0-49c6-a781-84b902033387"
     }
 ]
