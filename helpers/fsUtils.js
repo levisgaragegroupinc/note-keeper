@@ -36,7 +36,7 @@ const readAndDeleteNote = (noteId, file, res) => {
       console.log(noteData[0]);
 
       for (let i = 0; i < noteData.length; i++) {
-        if (noteData.id[i] != noteId) {
+        if (noteData[i].id != noteId) {
           //cannot read properties of undefined (reading '0')
           noteList.push(noteData[i]);
         }
